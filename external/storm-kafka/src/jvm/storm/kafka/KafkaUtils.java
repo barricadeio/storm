@@ -182,7 +182,7 @@ public class KafkaUtils {
             KafkaError error = KafkaError.getError(fetchResponse.errorCode(topic, partitionId));
             if (error.equals(KafkaError.OFFSET_OUT_OF_RANGE) && config.useStartOffsetTimeIfOffsetOutOfRange) {
                 LOG.warn("Got fetch request with offset out of range: [" + offset + "]");
-                throw new UpdateOffsetException();
+                throw new UpdateOffsetException(offset);
             } else {
                 String message = "Error fetching data from [" + partition + "] for topic [" + topic + "]: [" + error + "]";
                 LOG.error(message);
